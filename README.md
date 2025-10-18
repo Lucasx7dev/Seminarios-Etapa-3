@@ -16,6 +16,7 @@ int limiteMedio = 400;   // Som médio
 int limiteAlto  = 700;   // Som forte
 
 void setup() {
+
   pinMode(ledVerde, OUTPUT);
   pinMode(ledAmarelo, OUTPUT);
   pinMode(ledVermelho, OUTPUT);
@@ -24,6 +25,7 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Sistema de acessibilidade com LEDs iniciado.");
 }
+
 
 void loop() {
   int valorSom = analogRead(pinoSom); // Lê intensidade do som
@@ -42,16 +44,19 @@ void loop() {
     digitalWrite(motor, HIGH);
     delay(1000);
   } 
+  
   else if (valorSom > limiteMedio) {
     // Som médio (voz alta, aviso)
     digitalWrite(ledAmarelo, HIGH);
     delay(800);
   } 
+  
   else if (valorSom > limiteBaixo) {
     // Som leve (voz próxima)
     digitalWrite(ledVerde, HIGH);
     delay(500);
   }
+  
 
   delay(100);
 }
