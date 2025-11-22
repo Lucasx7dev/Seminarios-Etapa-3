@@ -140,6 +140,13 @@ void loop() {
 imagem da simulação feita no Tinkercad:
 <img width="1917" height="985" alt="image" src="https://github.com/user-attachments/assets/8aff0966-7e05-4f11-8c34-1a1ef905c9cc" />
 
+prototipo base:
+<img width="1917" height="985" alt="prototipo" src="https://github.com/user-attachments/assets/d0b089e3-182b-4c93-9c15-3d0777ca3a83" />
+
+prototipo inicial:
+
+<img width="353" height="443" alt="prototipo inicial" src="https://github.com/user-attachments/assets/0478d86c-9389-48f6-92f6-5aed9a878a48" />
+
 
 
 Equipe:
