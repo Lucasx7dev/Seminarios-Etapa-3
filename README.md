@@ -1,62 +1,156 @@
 # Seminarios-Etapa-4
-Projeto: Sistema de Acessibilidade Auditiva com LEDs de Nível de Som
+Sistema de Acessibilidade Auditiva com LEDs e Display LCD
 
-// Projeto: Sistema de Acessibilidade Auditiva com LEDS.
-// Descrição: Converte som em sinais visuais coloridos e vibração
+Um projeto desenvolvido para auxiliar pessoas com deficiência auditiva através da conversão de som em sinais visuais utilizando LEDs coloridos e um display LCD.
 
-int pinoSom = A0;     // Sensor de som analógico 
-int ledVerde = 9;     // Som leve
-int ledAmarelo = 10;  // Som médio
-int ledVermelho = 11; // Som forte
-int motor = 6;        // Motor vibracall 
+Contexto do Problema
 
-//  ajuste de intensidade sonora (0–1023)
-int limiteBaixo = 200;   // Som leve
-int limiteMedio = 400;   // Som médio
-int limiteAlto  = 700;   // Som forte
+Pessoas com perda auditiva têm grande dificuldade em perceber sons importantes do ambiente, como:
+
+Chamadas de voz
+
+Batidas na porta
+
+Alarmes ou avisos sonoros
+
+Isso pode afetar a segurança, a independência e a comunicação no dia a dia.
+
+Pensando nisso, nossa equipe desenvolveu um sistema que identifica o nível de som e o converte em alertas visuais.
+
+Objetivo do Projeto
+
+Criar um dispositivo acessível que:
+
+ Detecta o volume do som ambiente usando um sensor (simulado por potenciômetro no Tinkercad)
+ Acende LEDs de diferentes cores conforme a intensidade do som
+ Exibe o valor do som e alertas no display LCD
+ Ajuda pessoas com deficiência auditiva a perceber sinais do ambiente
+
+ Além de apenas mostrar o nível do som, agora o sistema interpreta o tipo de aviso, dependendo da intensidade captada:
+
+Baixa: “Hora do Lanche”  Sinal suave     
+Média: “Chamada”   Chamado para sala 
+Alta:“Hora da Saída”  Sinal forte       
+Muito Alta:“ALARME!” Emergência   
+
+Objetivo
+
+Oferecer apoio acessível a estudantes surdos ou com deficiência auditiva, permitindo que eles vejam na tela o significado do som que está acontecendo no ambiente.
+
+Funcionamento
+
+O sensor de som (simulado por potenciômetro no Tinkercad):
+
+Capta o nível sonoro
+
+O Arduino compara com limites pré-definidos
+
+Acende o LED correspondente
+
+Mostra na tela LCD 16x2 o tipo de aviso
+
+Gera um alerta visual claro e imediato
+
+Componentes
+
+Arduino Uno
+
+Potenciômetro (sensor de som simulado)
+
+LCD 16x2 com I2C
+
+3 LEDs (verde, amarelo, vermelho)
+
+Resistores
+
+Protoboard
+
+Jumpers
+
+Codico para o arduino:
+
+
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+int pinoSom = A0; 
+int ledVerde = 9;
+int ledAmarelo = 10;
+int ledVermelho = 11;
+
+// Limites ajustáveis
+int limiteLanche = 250;      // som leve
+int limiteChamada = 450;     // som médio
+int limiteSaida = 650;       // som alto
+int limiteAlarme = 800;      // som muito alto
 
 void setup() {
-
   pinMode(ledVerde, OUTPUT);
   pinMode(ledAmarelo, OUTPUT);
   pinMode(ledVermelho, OUTPUT);
-  pinMode(motor, OUTPUT);
 
   Serial.begin(9600);
-  Serial.println("Sistema de acessibilidade com LEDs iniciado.");
+
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("Sistema Sonoro");
+  delay(1200);
 }
 
-
 void loop() {
-  int valorSom = analogRead(pinoSom); // Lê intensidade do som
-  Serial.print("Som detectado: ");
-  Serial.println(valorSom);
-
-  // Desliga tudo antes de atualizar
+  int som = analogRead(pinoSom);
+  
+  // Apaga LEDs
   digitalWrite(ledVerde, LOW);
   digitalWrite(ledAmarelo, LOW);
   digitalWrite(ledVermelho, LOW);
-  digitalWrite(motor, LOW);
 
-  if (valorSom > limiteAlto) {
-    // Som forte (alarme, campainha)
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Som: ");
+  lcd.print(som);
+
+  lcd.setCursor(0, 1);
+
+  if (som > limiteAlarme) {
     digitalWrite(ledVermelho, HIGH);
-    digitalWrite(motor, HIGH);
-    delay(1000);
-  } 
-  
-  else if (valorSom > limiteMedio) {
-    // Som médio (voz alta, aviso)
-    digitalWrite(ledAmarelo, HIGH);
-    delay(800);
-  } 
-  
-  else if (valorSom > limiteBaixo) {
-    // Som leve (voz próxima)
-    digitalWrite(ledVerde, HIGH);
-    delay(500);
+    lcd.print("ALARME !!!");
   }
-  
+  else if (som > limiteSaida) {
+    digitalWrite(ledVermelho, HIGH);
+    lcd.print("Hora da SAIDA");
+  }
+  else if (som > limiteChamada) {
+    digitalWrite(ledAmarelo, HIGH);
+    lcd.print("CHAMADA");
+  }
+  else if (som > limiteLanche) {
+    digitalWrite(ledVerde, HIGH);
+    lcd.print("Hora do LANCHE");
+  }
+  else {
+    lcd.print("Ambiente calmo");
+  }
 
-  delay(100);
+  delay(200);
 }
+
+
+Equipe:
+
+Lucas Manoel
+
+Gabriel de Paula Lima
+
+Pedro Tooda
+
+Andre Luiz
+
+Vitor Rezende
+
+
+
+
