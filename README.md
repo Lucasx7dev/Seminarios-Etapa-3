@@ -143,7 +143,12 @@ imagem da simulação feita no Tinkercad:
 prototipo base:
 
 <img width="1536" height="1024" alt="prototipo_base" src="https://github.com/user-attachments/assets/90cb868b-e897-4ed2-b76c-23275fa33d23" />
+
+
 prototipo inicial:
+
+
+
 <img width="353" height="443" alt="prototipo inicial" src="https://github.com/user-attachments/assets/0478d86c-9389-48f6-92f6-5aed9a878a48" />
 
 
