@@ -137,6 +137,9 @@ void loop() {
 
   delay(200);
 }
+imagem da simulação feita no Tinkercad:
+<img width="1917" height="985" alt="image" src="https://github.com/user-attachments/assets/8aff0966-7e05-4f11-8c34-1a1ef905c9cc" />
+
 
 
 Equipe:
