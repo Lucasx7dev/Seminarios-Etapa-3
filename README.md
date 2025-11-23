@@ -30,8 +30,8 @@ Criar um dispositivo acessível que:
 
 Baixa: “Hora do Lanche”  Sinal suave     
 Média: “Chamada”   Chamado para sala 
-Alta:“Hora da Saída”  Sinal forte       
-Muito Alta:“ALARME!” Emergência   
+Alta: “Hora da Saída”  Sinal forte       
+Muito Alta: “ALARME!” Emergência   
 
 Objetivo
 
@@ -67,7 +67,7 @@ Protoboard
 
 Jumpers
 
-Codico para o arduino:
+Código para o arduino:
 
 
 
@@ -166,7 +166,7 @@ Lucas Manoel
 
 Gabriel de Paula Lima
 
-Pedro Tooda
+Pedro Paulo Fonteles Tooda
 
 Andre Luiz
 
